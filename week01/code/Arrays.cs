@@ -19,7 +19,7 @@ public static class Arrays
         // add eacu value to an empty array, finally i will return the array of values 
 
         List<double> results = new(); 
-        for (var i = 1; i < length; i++)
+        for (var i = 1; i <= length; i++)
         {
             results.Add( number * i );
             Console.WriteLine(number * i);
