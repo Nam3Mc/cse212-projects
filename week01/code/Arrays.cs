@@ -13,7 +13,19 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // what would i do to solve this task is use a for loop
+        // so i wil set the first var as 1 set the secomd parameter of the for loop to stop once the var declared
+        // is equal or minor that the length, inside the loop i will multiply the number times the declarer var and 
+        // add eacu value to an empty array, finally i will return the array of values 
+
+        List<double> results = new(); 
+        for (var i = 1; i < length; i++)
+        {
+            results.Add( number * i );
+            Console.WriteLine(number * i);
+        }
+
+        return results.ToArray(); // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +41,17 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // to comple this activity i set the split index as var taking the data.Count  - amount and using GetRange 
+        // using these to values splitIndex, amount will give me the tail range then i will set the variable for head 
+        // with the GetRange and the following parameters 0 and splitIndex to have the first part 
+        //  as this is a void and will return nothing i would clena the data and then addRange tail and head 
+        int splitIndex = data.Count - amount;
+        var tail = data.GetRange(splitIndex, amount);
+        var head = data.GetRange(0, splitIndex);
+        data.Clear();
+        data.AddRange(tail);
+        data.AddRange(head);
+
     }
 }
