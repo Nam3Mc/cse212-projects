@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using System.Security.Cryptography;
+
+/// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
 /// </summary>
@@ -11,26 +13,45 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: if not size is given to the queue then it is set to 10 automatlically 
+        // Expected Result:  the newCs will have a maximun of 10 in capacity
         Console.WriteLine("Test 1");
+        var newCs = new CustomerService(-1);
 
-        // Defect(s) Found: 
+        // Defect(s) Found: no defects found because it will automatically set the max queue to 10 
 
         Console.WriteLine("=================");
 
-        // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Test 2 
+        // Scenario: adding more customers that the zise of the queue 
+        // Expected Result: a message isdisplayed that shows an alert that not more customers cna be added 
         Console.WriteLine("Test 2");
+        newCs = new CustomerService(3);
+        newCs.AddNewCustomer();
+        newCs.AddNewCustomer();
+        newCs.AddNewCustomer();
+        newCs.AddNewCustomer();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: by adding the last customer an error mesage will be displayed
 
         Console.WriteLine("=================");
 
         // Add more Test Cases As Needed Below
-    }
 
+        // Test 3
+        // Expected Result: append a list of ccustomers should be retuned in the order intorduced 
+        // Scenario: adding 4 customer should returnd fom the first to the last 
+        Console.WriteLine("Test 2");   
+        newCs = new CustomerService(4);
+        newCs.AddNewCustomer();        
+        newCs.AddNewCustomer();        
+        newCs.AddNewCustomer();                
+        newCs.AddNewCustomer();  
+        Console.WriteLine(newCs._queue);
+
+        // Defect(s) Found:       
+
+    }    
     private readonly List<Customer> _queue = new();
     private readonly int _maxSize;
 
@@ -67,7 +88,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +109,17 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+
+        if (_queue.Count == 0)
+        {
+            Console.WriteLine("There is not customer in the list to serve");
+        }
+        else
+        {
+            var customer = _queue[0];
+            _queue.RemoveAt(0);
+            Console.WriteLine(customer);
+        }
     }
 
     /// <summary>
